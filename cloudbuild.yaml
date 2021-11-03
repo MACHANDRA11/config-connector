@@ -3,7 +3,7 @@ steps:
 - name: 'gcr.io/cloud-builders/kubectl'
   id: Deploy
   args:
-  - 'delete'
+  - 'apply'
   - '-f'
   - 'cc-files/bg1.yaml'
   - '-n'

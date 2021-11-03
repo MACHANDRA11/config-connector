@@ -6,6 +6,8 @@ steps:
   - 'apply'
   - '-f'
   - 'cc-files/bg1.yaml'
+  - '-n'
+  - 'test-cc'
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=test-config-connector'

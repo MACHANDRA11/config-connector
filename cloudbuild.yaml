@@ -1,0 +1,34 @@
+steps:
+
+- name: 'gcr.io/cloud-builders/kubectl'
+  id: Deploy
+  args:
+  - 'apply'
+  - '-f'
+  - 'cc-files/bg1.yaml'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=test-config-connector'
+
+
+
+
+  # This step builds the container image.
+# - name: 'gcr.io/cloud-builders/docker'
+#   id: Build
+#   args:
+#   - 'build'
+#   - '-t'
+#   - 'gcr.io/$PROJECT_ID/test_cha:8'
+#   - '.'
+
+# This step pushes the image to Container Registry
+# The PROJECT_ID and SHORT_SHA variables are automatically
+# replaced by Cloud Build.
+# - name: 'gcr.io/cloud-builders/docker'
+#   id: Push
+#   args:
+#   - 'push'
+#   - 'gcr.io/$PROJECT_ID/test_cha:8'
+
+# images: ['gcr.io/$PROJECT_ID/test_cha:8']

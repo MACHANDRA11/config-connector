@@ -8,6 +8,8 @@ steps:
   - |
     echo "HI iam running"
     gcloud version
+    source package.sh
+    kpt version
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=test-config-connector'

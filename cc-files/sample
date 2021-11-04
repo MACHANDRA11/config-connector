@@ -7,12 +7,12 @@ packageMetadata:
   shortDescription: create a pubsub topic
 openAPI:
   definitions:
-    io.k8s.cli.setters.topic-name:
-      description: topic name
+    io.k8s.cli.setters.topicname:
+      description: topicname
       x-k8s-cli:
         setter:
-          name: topic-name
-          value: dcerws
+          name: topicname
+          value: ${TOPIC_NAME}
           setBy: package-default
     # io.k8s.cli.setters.service-project:
     #   description: ID of project using network

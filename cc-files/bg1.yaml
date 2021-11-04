@@ -3,4 +3,4 @@
   metadata:
     labels:
       env: test
-    name: ${TOPIC_NAME?}
+    name: dravid

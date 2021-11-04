@@ -1,0 +1,52 @@
+kpt cfg set . topicname cmhed
+kpt cfg set . org-id VALUE
+gcloud components install  kpt 
+sudo apt-get install google-cloud-sdk-kpt
+kubectl describe pubsubtopics
+kubectl wait --for=condition=READY pubsubtopics smcrf
+
+download kpt
+curl -L https://github.com/GoogleContainerTools/kpt/releases/download/v0.39.2/kpt_linux_amd64 > kpt_0_39_2
+chmod +x kpt_0_39_2
+alias kpt="$(readlink -f kpt_0_39_2)"
+
+mkdir -p ~/bin
+curl -L https://github.com/GoogleContainerTools/kpt/releases/download/v1.0.0-beta.1/kpt_linux_amd64 --output ~/bin/kpt && chmod u+x ~/bin/kpt
+export PATH=${HOME}/bin:${PATH}
+
+kpt live apply wordpress
+kpt live status wordpress
+kpt live destroy wordpress
+kubectl get deployment
+kpt fn eval -i list-setters:v0.1
+
+FROM alpine:3.5
+RUN apk update
+RUN apk add git
+
+---------------
+FROM ubuntu:14.04
+ARG CLOUD_SDK_VERSION=232.0.0
+ENV CLOUD_SDK_VERSION=$CLOUD_SDK_VERSION
+# Install.
+RUN \
+  apt-get update && \
+  apt-get -y upgrade && \
+  apt-get install -y  curl git unzip vim wget 
+RUN \
+  curl -L https://github.com/GoogleContainerTools/kpt/releases/download/v0.39.2/kpt_linux_amd64 > kpt_0_39_2 && \
+  chmod +x kpt_0_39_2 \
+  alias kpt="$(readlink -f kpt_0_39_2)" 
+RUN \
+  export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
+  echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" > /etc/apt/sources.list.d/google-cloud-sdk.list && \
+  curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+  apt-get update && \
+  apt-get install -y google-cloud-sdk=${CLOUD_SDK_VERSION}-0 kubectl 
+  gcloud config set core/disable_usage_reporting true && \
+  gcloud config set component_manager/disable_update_check true && \
+  gcloud config set metrics/environment github_docker_image && \
+  gcloud --version && \
+  docker --version && kubectl version --client
+VOLUME ["/root/.config"]
+ 

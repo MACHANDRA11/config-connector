@@ -15,10 +15,11 @@ steps:
     # kpt live init cc-files/
     # kpt live apply cc-files/ -n test-cc
     # kpt live status cc-files/ -n test-cc
+    gcloud container clusters get-credentials test-config-connector --zone us-central1-a --project devtools-317213
     kubectl apply -f cc-files/ -n test-cc
-  env:
-  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=test-config-connector'
+  # env:
+  # - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+  # - 'CLOUDSDK_CONTAINER_CLUSTER=test-config-connector'
 
 # - name: 'gcr.io/cloud-builders/kubectl'
 #   id: Deploy

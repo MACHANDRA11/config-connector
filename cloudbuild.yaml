@@ -7,7 +7,7 @@ steps:
   - -c
   - |
     echo "HI iam running"
-    kpt version
+    gcloud version
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=test-config-connector'

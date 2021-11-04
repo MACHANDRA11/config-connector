@@ -6,10 +6,16 @@ steps:
   args:
   - -c
   - |
-    echo "HI iam running"
-    gcloud version
     source package.sh
+    echo "deploying code in cluster"
     kpt version
+    kpt pkg init cc-files/
+    kpt cfg create-setter cc-files/ name dravid --field="metadata.name"
+    # kpt cfg set cc-files/  name smtrfds
+    kpt live init cc-files/
+    kpt live apply cc-files/ -n test-cc
+    kpt live status cc-files/ -n test-cc
+
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=test-config-connector'

@@ -38,7 +38,7 @@ steps:
     cp -r cc-files hydrated-cc
     echo "Git remote"
     git remote -v
-    git remote set-url origin git@github.com:MACHANDRA11/config-connector.git
+    git remote set-url origin https://github.com/MACHANDRA11/config-connector.git
     git config --global user.name "MACHANDRA11"
     git config --global user.email "chandrakanth.maddana@mediaagility.com"
     git add -A

@@ -29,6 +29,8 @@ steps:
     kpt pkg init cc-files/
     kpt cfg create-setter cc-files/ name dravidq --field="metadata.name"
     cp -r cc-files hydrated-cc
+    echo "Git remote"
+    git remote -v
     git remote set-url origin git@github.com:MACHANDRA11/config-connector.git
     git config --global user.name "MACHANDRA11"
     git config --global user.email "chandrakanth.maddana@mediaagility.com"
@@ -39,8 +41,8 @@ steps:
     # kpt live init cc-files/
     # kpt live apply cc-files/ -n test-cc
     # kpt live status cc-files/ -n test-cc
-    gcloud container clusters get-credentials test-config-connector --zone us-central1-a --project devtools-317213
-    kubectl apply -f hydrated-cc/ -n test-cc
+    # gcloud container clusters get-credentials test-config-connector --zone us-central1-a --project devtools-317213
+    # kubectl apply -f hydrated-cc/ -n test-cc
   volumes:
   - name: 'ssh'
     path: /root/.ssh

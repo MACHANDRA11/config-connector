@@ -27,8 +27,9 @@ steps:
     echo "deploying code in cluster"
     kpt version
     kpt pkg init cc-files/
-    kpt cfg create-setter cc-files/ name dravid --field="metadata.name"
+    kpt cfg create-setter cc-files/ name dravidq --field="metadata.name"
     cp -r cc-files hydrated-cc
+    git remote set-url origin git@github.com:MACHANDRA11/config-connector.git
     git config --global user.name "MACHANDRA11"
     git config --global user.email "chandrakanth.maddana@mediaagility.com"
     git add .

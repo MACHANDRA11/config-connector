@@ -29,6 +29,8 @@ steps:
     kpt pkg init cc-files/
     kpt cfg create-setter cc-files/ name dravid --field="metadata.name"
     cp -r cc-files hydrated-cc
+    git config --global user.name "MACHANDRA11"
+    git config --global user.email "chandrakanth.maddana@mediaagility.com"
     git add .
     git commit -m "applied changes"
     git push origin main

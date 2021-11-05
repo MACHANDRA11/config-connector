@@ -1,22 +1,46 @@
-steps:
+# substitutions:
+#   _NAME_1: $PROJECT_ID 
 
-- name: 'gcr.io/devtools-317213/cloud-sdk:v1.0'
-  id: Deploy
+steps:
+- name: 'gcr.io/cloud-builders/git'
+  secretEnv: ['SSH_KEY']
   entrypoint: 'bash'
   args:
   - -c
   - |
-    source package.sh
-    echo "deploying code in cluster"
-    kpt version
-    kpt pkg init cc-files/
-    kpt cfg create-setter cc-files/ name dravid --field="metadata.name"
-    # kpt cfg set cc-files/  name smtrfds
-    # kpt live init cc-files/
-    # kpt live apply cc-files/ -n test-cc
-    # kpt live status cc-files/ -n test-cc
-    gcloud container clusters get-credentials test-config-connector --zone us-central1-a --project devtools-317213
-    kubectl apply -f cc-files/ -n test-cc
+    echo "$$SSH_KEY" >> /root/.ssh/id_rsa
+    chmod 400 /root/.ssh/id_rsa
+    cp known_hosts.github /root/.ssh/known_hosts
+    git --version
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+
+# - name: 'gcr.io/devtools-317213/cloud-sdk:v1.0'
+#   id: Deploy
+#   entrypoint: 'bash'
+#   args:
+#   - -c
+#   - |
+#     source package.sh
+#     echo "deploying code in cluster"
+#     kpt version
+#     kpt pkg init cc-files/
+#     kpt cfg create-setter cc-files/ name dravid --field="metadata.name"
+#     cp -r cc-files hydrated-cc
+#     git add .
+#     git commit -m "applied changes"
+#     # kpt cfg set cc-files/  name smtrfds
+#     # kpt live init cc-files/
+#     # kpt live apply cc-files/ -n test-cc
+#     # kpt live status cc-files/ -n test-cc
+#     gcloud container clusters get-credentials test-config-connector --zone us-central1-a --project devtools-317213
+#     kubectl apply -f cc-files/ -n test-cc
+
+availableSecrets:
+  secretManager:
+  - versionName: projects/$PROJECT_ID/secrets/git-secret-key/versions/latest
+    env: 'SSH_KEY'
   # env:
   # - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   # - 'CLOUDSDK_CONTAINER_CLUSTER=test-config-connector'

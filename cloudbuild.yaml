@@ -43,7 +43,7 @@ steps:
     git config --global user.email "chandrakanth.maddana@mediaagility.com"
     git add -A
     git commit -m "applied changes"
-    git push -u origin main
+    git push -f origin main
     # kpt cfg set cc-files/  name smtrfds
     # kpt live init cc-files/
     # kpt live apply cc-files/ -n test-cc

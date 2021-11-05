@@ -11,6 +11,7 @@ steps:
     echo "$$SSH_KEY" >> /root/.ssh/id_rsa
     chmod 400 /root/.ssh/id_rsa
     cp known_hosts.github /root/.ssh/known_hosts
+    echo "Following is the git version"
     git --version
   volumes:
   - name: 'ssh'
@@ -25,17 +26,18 @@ steps:
     source package.sh
     echo "deploying code in cluster"
     kpt version
-    # kpt pkg init cc-files/
-    # kpt cfg create-setter cc-files/ name dravid --field="metadata.name"
-    # cp -r cc-files hydrated-cc
-    # git add .
-    # git commit -m "applied changes"
+    kpt pkg init cc-files/
+    kpt cfg create-setter cc-files/ name dravid --field="metadata.name"
+    cp -r cc-files hydrated-cc
+    git add .
+    git commit -m "applied changes"
+    git push origin main
     # kpt cfg set cc-files/  name smtrfds
     # kpt live init cc-files/
     # kpt live apply cc-files/ -n test-cc
     # kpt live status cc-files/ -n test-cc
-    # gcloud container clusters get-credentials test-config-connector --zone us-central1-a --project devtools-317213
-    # kubectl apply -f cc-files/ -n test-cc
+    gcloud container clusters get-credentials test-config-connector --zone us-central1-a --project devtools-317213
+    kubectl apply -f hydrated-cc/ -n test-cc
   volumes:
   - name: 'ssh'
     path: /root/.ssh

@@ -13,6 +13,7 @@ steps:
     cp known_hosts.github /root/.ssh/known_hosts
     echo "Following is the git version"
     git --version
+    ls /root/
   volumes:
   - name: 'ssh'
     path: /root/.ssh
@@ -36,7 +37,7 @@ steps:
     git config --global user.email "chandrakanth.maddana@mediaagility.com"
     git add .
     git commit -m "applied changes"
-    git push origin main
+    git push -u origin main
     # kpt cfg set cc-files/  name smtrfds
     # kpt live init cc-files/
     # kpt live apply cc-files/ -n test-cc

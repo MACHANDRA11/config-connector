@@ -35,7 +35,7 @@ steps:
     git remote set-url origin git@github.com:MACHANDRA11/config-connector.git
     git config --global user.name "MACHANDRA11"
     git config --global user.email "chandrakanth.maddana@mediaagility.com"
-    git add .
+    git add -A
     git commit -m "applied changes"
     git push -u origin main
     # kpt cfg set cc-files/  name smtrfds

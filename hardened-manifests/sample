@@ -1,0 +1,79 @@
+
+apiVersion: kpt.dev/v1alpha1
+kind: Kptfile
+metadata:
+  name: pubsub
+packageMetadata:
+  shortDescription: create a pubsub topic
+openAPI:
+  definitions:
+    io.k8s.cli.setters.topicname:
+      description: topicname
+      x-k8s-cli:
+        setter:
+          name: topicname
+          value: ${TOPIC_NAME}
+          setBy: package-default
+    # io.k8s.cli.setters.service-project:
+    #   description: ID of project using network
+    #   x-k8s-cli:
+    #     setter:
+    #       name: service-project
+    #       value: ${SERVICE_PROJECT_ID?}
+    #       setBy: PLACEHOLDER
+    # io.k8s.cli.setters.billing-account:
+    #   description: ID of billing account
+    #   x-k8s-cli:
+    #     setter:
+    #       name: billing-account
+    #       value: "${BILLING_ACCOUNT_ID?}"
+    #       setBy: PLACEHOLDER
+    # io.k8s.cli.setters.network-name:
+    #   description: name of VPC network
+    #   x-k8s-cli:
+    #     setter:
+    #       name: network-name
+    #       value: sharedvpcnetwork
+    #       setBy: package-default
+    # io.k8s.cli.setters.org-id:
+    #   description: ID of organization
+    #   x-k8s-cli:
+    #     setter:
+    #       name: org-id
+    #       value: "${ORG_ID?}"
+    #       setBy: PLACEHOLDER
+    # io.k8s.cli.setters.default-namespace:
+    #   description: namespace where solution will be applied
+    #   x-k8s-cli:
+    #     setter:
+    #       name: default-namespace
+    #       value: ${DEFAULT_NAMESPACE?}
+    #       setBy: PLACEHOLDER
+
+  #    464  kpt pkg init test-cc-01-00/
+  # 465  kpt cfg create-setter . name smsrftp --field="metadata.name"
+  # 466  cd test-cc-01-00/
+  # 467  kpt cfg create-setter . name smsrftp --field="metadata.name"
+  # 468  kpt version
+  # 469  cd ..
+  # 470  ls
+  # 471  kpt version
+  # 472  chmod +x kpt_0_39_2
+  # 473  alias kpt="$(readlink -f kpt_0_39_2)"
+  # 474  kpt version
+  # 475  ls
+  # 476  cd test-cc-01-00/
+  # 477  ls
+  # 478  kpt cfg create-setter . name smsrftp --field="metadata.name"
+  # 479  cat bq1.yaml
+  # 480  cat Kptfile
+  # 481  kpt live apply .
+  # 482  cd ../
+  # 483  kpt live apply test-cc-01-00/
+  # 484  kpt live init test-cc-01-00/
+  # 485  kpt live apply test-cc-01-00/
+  # 486  kubectl describe pubsubtopics
+  # 487  kpt live apply test-cc-01-00/ -n test-cc
+  # 488  kpt cfg set test-cc-01-00/  name smtrfds
+  # 489  kpt live apply test-cc-01-00/ -n test-cc
+  # 490  kpt live status test-cc-01-00/ -n test-cc

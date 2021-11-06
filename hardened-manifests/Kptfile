@@ -10,4 +10,4 @@ openAPI:
       x-k8s-cli:
         setter:
           name: name
-          value: dravifq
+          value: annathe

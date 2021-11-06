@@ -3,4 +3,4 @@ kind: PubSubTopic
 metadata:
   labels:
     env: test
-  name: dravifq
+  name: dravidq
